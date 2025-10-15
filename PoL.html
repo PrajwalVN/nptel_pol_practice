@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Psychology of Learning - Test Portal</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      .header h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+        font-size: 1.1em;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .mode-selection {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .mode-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
+      }
+
+      .mode-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      }
+
+      .mode-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.5em;
+      }
+
+      .assignment-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .assignment-btn {
+        background: white;
+        border: 2px solid #667eea;
+        color: #667eea;
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s;
+        font-size: 1em;
+      }
+
+      .assignment-btn:hover {
+        background: #667eea;
+        color: white;
+        transform: scale(1.05);
+      }
+
+      .question-container {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        border-left: 5px solid #667eea;
+      }
+
+      .question-number {
+        color: #667eea;
+        font-weight: bold;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+      }
+
+      .question-text {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .option {
+        background: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+      }
+
+      .option:hover {
+        border-color: #667eea;
+        transform: translateX(5px);
+      }
+
+      .option input[type="radio"] {
+        margin-right: 12px;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+      }
+
+      .option.correct {
+        background: #d4edda;
+        border-color: #28a745;
+      }
+
+      .option.incorrect {
+        background: #f8d7da;
+        border-color: #dc3545;
+      }
+
+      .option.selected {
+        border-color: #667eea;
+        background: #f0f3ff;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        gap: 15px;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: #5a6268;
+      }
+
+      .progress-bar {
+        background: #e0e0e0;
+        height: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 100%;
+        transition: width 0.3s;
+      }
+
+      .progress-text {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #666;
+        font-weight: bold;
+      }
+
+      .results {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+      }
+
+      .results h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+      }
+
+      .score {
+        font-size: 4em;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+
+      .results-details {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 1.5em;
+        }
+
+        .assignment-grid {
+          grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        }
+
+        .nav-buttons {
+          flex-direction: column;
+        }
+        .option {
+          display: block;
+          padding: 10px;
+          margin: 6px 0;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: 0.3s;
+          border: 1px solid #ccc;
+        }
+
+        .option.correct {
+          background-color: #4caf50; /* green */
+          color: white;
+          border-color: #4caf50;
+        }
+
+        .option.incorrect {
+          background-color: #f44336; /* red */
+          color: white;
+          border-color: #f44336;
+        }
+
+        .option:hover {
+          transform: scale(1.02);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🎓 Psychology of Learning</h1>
+        <p>NPTEL Online Certification - Test Portal</p>
+      </div>
+
+      <div class="content">
+        <!-- Mode Selection Screen -->
+        <div id="modeSelection">
+          <h2 style="margin-bottom: 20px; color: #333">Select Test Mode</h2>
+          <div class="mode-selection">
+            <div class="mode-card" id="singleModeCard">
+              <h3>📝 Single Assignment</h3>
+              <p>Choose one assignment to test</p>
+            </div>
+            <div class="mode-card" id="fullModeCard">
+              <h3>🎯 Full Test</h3>
+              <p>All 12 assignments (120 questions)</p>
+            </div>
+          </div>
+
+          <div id="assignmentSelection" class="hidden">
+            <h3 style="margin-bottom: 15px; color: #333">
+              Select Assignment (0-11)
+            </h3>
+            <div class="assignment-grid" id="assignmentGrid"></div>
+          </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="testScreen" class="hidden">
+          <div class="progress-text" id="progressText"></div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div id="questionContainer"></div>
+
+          <div class="nav-buttons">
+            <button class="btn btn-secondary" id="prevBtn">← Previous</button>
+            <button class="btn btn-secondary" id="exitBtn">Exit Test</button>
+            <button class="btn btn-primary" id="nextBtn">Next →</button>
+          </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="hidden">
+          <div class="results">
+            <h2>🎉 Test Completed!</h2>
+            <div class="score" id="scoreDisplay"></div>
+            <div class="results-details">
+              <p id="resultsDetails"></p>
+            </div>
+            <button
+              class="btn btn-primary"
+              id="returnBtn"
+              style="margin-top: 30px"
+            >
+              Return to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // State variables
+      let currentQuestionIndex = 0;
+      let currentTest = [];
+      let userAnswers = [];
+      let testMode = "";
+
+      const allQuestions = [
+        // Assignment 0
+        {
+          assignment: 0,
+          q: "What is Psychology?",
+          opts: [
+            "A Science subject",
+            "Is objective perception",
+            "An art of living",
+            "A thought process",
+            "A study of cognitive processes & behavior",
+          ],
+          ans: 4,
+        },
+        {
+          assignment: 0,
+          q: "A broad field of study that explores a variety of questions about thoughts, feelings and actions is -------?",
+          opts: [
+            "Society",
+            "Globalization",
+            "Psychology",
+            "Social Science",
+            "Human Development",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 0,
+          q: "A systematic assessment that provides information on political views, consumer buying habits and many other topics is called--------------?",
+          opts: [
+            "Standardized test",
+            "Projects",
+            "Experiments",
+            "Survey",
+            "Psychological tests",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 0,
+          q: "The word Psyche means -------------?",
+          opts: [
+            "Body or physique",
+            "Mind or soul",
+            "Science & spirituality",
+            "Mental health",
+            "Neuropsychology",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 0,
+          q: "Who established psychology laboratory in Germany?",
+          opts: [
+            "B.F. Skinner",
+            "J. Thorndike",
+            "Sigmund Freud",
+            "David Kolb",
+            "Wilhelm Wundt",
+          ],
+          ans: 4,
+        },
+        {
+          assignment: 0,
+          q: "To help people to function effectively and fulfill their own unique potential is the aim of----------?",
+          opts: [
+            "Humanistic psychology",
+            "Social Psychiatry",
+            "Philosophy",
+            "Development studies",
+            "Sustainable development",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 0,
+          q: "Behaviorists use a learning process to change abnormal behavior is called------------?",
+          opts: [
+            "Rationalism",
+            "Experiential intervention",
+            "Gestalt mechanism",
+            "Hypotheses verification",
+            "Conditioning",
+          ],
+          ans: 4,
+        },
+        {
+          assignment: 0,
+          q: "The study of changes in behavior during life time is called ----------.",
+          opts: [
+            "Behaviorism",
+            "Individual difference",
+            "Developmental Psychology",
+            "Maturational theory",
+            "Genetics or Heredity",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 0,
+          q: "The study of differences and similarities in the behavior of animals of different species is called ------------------------.",
+          opts: [
+            "Sociology",
+            "Social work",
+            "Rehabilitation studies",
+            "Comparative Psychology",
+            "Cultural Psychology",
+          ],
+          ans: 3,
+        },
+
+        // Assignment 1
+        {
+          assignment: 1,
+          q: "Which of the following is true regarding learning in psychology?",
+          opts: [
+            "The psychology of learning focuses on how people learn and how they interact with the environments in which they have not learnt",
+            "Learning does not involve any changes in the organism",
+            "Learning is a relatively temporary change in behavior",
+            "none of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 1,
+          q: "In order to say that learning has occurred, a/an ___ must occur during the lifetime of the organism.",
+          opts: [
+            "hidden change in behavior",
+            "small change in personality",
+            "visible change in emotions",
+            "observable change in behavior",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 1,
+          q: "Learning changes the ___ through the process of continuous interactions between the learner and the external environment.",
+          opts: [
+            "physical structure of the brain",
+            "chemical structure of neurons",
+            "physical structure of the heart",
+            "chemical structure of the spinal cord",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 1,
+          q: "Watson, one of the first psychologists to study learning and behavior is known for the ____.",
+          opts: [
+            "Little Albert experiment",
+            "Little John experiment",
+            "Little Robert experiment",
+            "Little Johnny experiment",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 1,
+          q: "Which of the following is not explored and described by the psychology of learning?",
+          opts: [
+            "principles of motivation",
+            "principles of forgetting",
+            "principles of genetic disorders",
+            "principles of memory",
+            "principles of retention",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 1,
+          q: "The state of ___ may be valuable at the start of a learning experience.",
+          opts: [
+            "conscious incompetence",
+            "unconscious incompetence",
+            "conscious over-competence",
+            "unconscious over-competence",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 1,
+          q: "___ is the decrease in the response that an organism gives to a stimulus to which it is exposed in numerous trials or occasions.",
+          opts: [
+            "Habituation",
+            "Sensitization",
+            "Forgetting",
+            "Meaningful learning",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 1,
+          q: "Cooperative learning is shaped by three crucial elements. Which of the following is one of them?",
+          opts: [
+            "formation of heterogeneous groups",
+            "positive interdependence",
+            "individual responsibility",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 1,
+          q: "Which of the following psychologists is an important contributor to the concept of observational learning?",
+          opts: ["Watson", "Dewey", "Bruner", "Bandura"],
+          ans: 3,
+        },
+        {
+          assignment: 1,
+          q: "Which of the following is not considered a pioneer of the behaviorism school of thought in psychology?",
+          opts: ["Watson", "Skinner", "Freud", "Pavlov"],
+          ans: 2,
+        },
+
+        // Assignment 2
+        {
+          assignment: 2,
+          q: "___ is known as the father of modern psychology.",
+          opts: [
+            "Sigmund Freud",
+            "Wilhelm Wundt",
+            "John Watson",
+            "Lev Vygotsky",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 2,
+          q: "Cognitivists objected to behaviorists because they felt that behaviorists ignored the important role of ___.",
+          opts: ["genetics", "emotions", "thinking", "stimulus reaction"],
+          ans: 2,
+        },
+        {
+          assignment: 2,
+          q: "___ is viewed as the mainstream for all research on learning designs.",
+          opts: [
+            "Psychoanalysis",
+            "Positive psychology",
+            "Cognitivism",
+            "Evolutionary psychology",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 2,
+          q: "___ is a perspective in psychology focusing on the belief that human consciousness cannot be broken down into its elements and is based on the concept of a 'whole'.",
+          opts: [
+            "Cognitivism",
+            "Behaviorism",
+            "Gestalt psychology",
+            "Positive psychology",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 2,
+          q: "Theory of multiple intelligences is given by ___.",
+          opts: [
+            "Howard Gardner",
+            "Edward C. Tolman",
+            "German Gestalt",
+            "Robert J. Sternberg",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 2,
+          q: "The general intelligence factor, also known as g, is what intelligence tests typically measure and refers only to ___ intelligence.",
+          opts: ["academic", "practical", "linguistic", "kinesthetic"],
+          ans: 0,
+        },
+        {
+          assignment: 2,
+          q: "Cognitive evaluation for planning, attention, simultaneous, and successive processing of individuals can be done through CAS based on PASS theory. CAS here stands for ___.",
+          opts: [
+            "Cognitive Achievement System",
+            "Cognitive Ability System",
+            "Cognitive Appraisal System",
+            "Cognitive Assessment System",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 2,
+          q: "BBL is a new science that shapes the learning process and is an approach that is based on the structure and function of the human brain. BBL stands for ___.",
+          opts: [
+            "Biological based learning",
+            "Brain based learning",
+            "Biological battery learning",
+            "Brain biology learning",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 2,
+          q: "Gagne's Conditions of Learning is also known as ___ Events of Instruction.",
+          opts: ["nine", "five", "ten", "seven"],
+          ans: 0,
+        },
+        {
+          assignment: 2,
+          q: "Which of the following is not a type of constructivism?",
+          opts: ["biological", "cognitive", "social", "radical"],
+          ans: 0,
+        },
+
+        // Assignment 3
+        {
+          assignment: 3,
+          q: "Which of the following is not one of the three major processes involved in memory?",
+          opts: ["encoding", "retrieval", "storage", "imagination"],
+          ans: 3,
+        },
+        {
+          assignment: 3,
+          q: "___ refers to changing information into a usable form.",
+          opts: ["Storage", "Recall", "Encoding", "Recollection", "Forgetting"],
+          ans: 2,
+        },
+        {
+          assignment: 3,
+          q: "___ refers to a range of mental processes relating to the acquisition, storage, manipulation and retrieval of information.",
+          opts: ["Cognition", "Construction", "Encoding", "Thinking"],
+          ans: 0,
+        },
+        {
+          assignment: 3,
+          q: "Which of the following is a challenge faced by people with social cognition deficits?",
+          opts: [
+            "talking too much to people",
+            "responding to well to people",
+            "difficulty in reading facial expressions",
+            "difficulty in getting good academic scores",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 3,
+          q: "Which of the following is not true about the assumptions underlying the Information Processing View of Learning?",
+          opts: [
+            "Information processing is analogous to computer processing",
+            "The human information processing system is interactive",
+            "There is no limit on how much information can be processed at each stage",
+            "Information is processed in steps",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 3,
+          q: "___ prevents the quick disappearance of information from short term memory",
+          opts: ["Rehearsal", "Encoding", "Retrieval", "None of the given"],
+          ans: 0,
+        },
+        {
+          assignment: 3,
+          q: "The Multicomponent Model of Working Memory is largely attributed to the work by ___",
+          opts: [
+            "Atkinson & Shiffrin",
+            "Baddeley",
+            "Piaget",
+            "Craik & Lockhart",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 3,
+          q: "___ memory refers to the events that can be reported from a person's life.",
+          opts: ["Episodic", "Semantic", "Procedural", "None of the given"],
+          ans: 0,
+        },
+        {
+          assignment: 3,
+          q: "The memory capacity depends on which of the following?",
+          opts: [
+            "complexity of the synapses",
+            "spatial and temporal correlations between memories",
+            "specific way memories are retrieved",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 3,
+          q: "Which of the following is not one of the three measurable dimensions of cognitive load?",
+          opts: [
+            "mental effort",
+            "mental load",
+            "physical effort",
+            "performance",
+          ],
+          ans: 2,
+        },
+
+        // Assignment 4
+        {
+          assignment: 4,
+          q: "The three main types of thinking in psychology include the following except ___.",
+          opts: ["symbolic", "creative", "divergent", "convergent"],
+          ans: 3,
+        },
+        {
+          assignment: 4,
+          q: "Young children engaging in imaginative play often engage in ___ thinking.",
+          opts: ["creative", "divergent", "symbolic", "convergent"],
+          ans: 2,
+        },
+        {
+          assignment: 4,
+          q: "Which of the following is a way in which we think?",
+          opts: [
+            "in verbal symbols",
+            "in mathematical symbols",
+            "in gestures and movements",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 4,
+          q: "People experience the ___ experience when they find the solution to a problem suddenly that had been in their mind for hours or days, late.",
+          opts: ["'oh no'", "'wow'", "'aha'", "none of the given"],
+          ans: 2,
+        },
+        {
+          assignment: 4,
+          q: "___ knowledge refers to knowledge of terminology and specific details.",
+          opts: ["factual", "conceptual", "procedural", "metacognitive"],
+          ans: 0,
+        },
+        {
+          assignment: 4,
+          q: "Which of the following is not true about metacognition?",
+          opts: [
+            "allows people to be dependent on others for their learning",
+            "often referred to as 'thinking about thinking'",
+            "is crucial for efficient independent learning because it fosters self-reflection",
+            "is a regulatory system that helps a person understand and control his or her own cognitive performance",
+            "Metacognition",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 4,
+          q: "Which of the following is not an effective way to develop reflective thinking?",
+          opts: [
+            "asking questions",
+            "self-questioning",
+            "negotiated learning",
+            "avoiding reflective discussions",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 4,
+          q: "Which of the following is not true about creative thinking?",
+          opts: [
+            "It is the ability to consider something in a new way",
+            "It is not a skill anybody can develop",
+            "It is the process of nurturing our imagination",
+            "It is all about developing innovative solutions to problems.",
+            "It requires a compilation of analytical, problem-solving, organizational and communication skills",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 4,
+          q: "The ___ stage of the creative thinking process refers to the 'eureka' moment.",
+          opts: [
+            "insight",
+            "incubation",
+            "evaluation",
+            "preparation",
+            "elaboration",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 4,
+          q: "In a concept map, two nodes connected with a labeled arrow are called a ___.",
+          opts: ["preposition", "nodal link", "schema", "proposition"],
+          ans: 3,
+        },
+
+        // Assignment 5
+        {
+          assignment: 5,
+          q: "Which of the following is not a causal factor for extrinsic motivation?",
+          opts: [
+            "rewards",
+            "social pressure",
+            "curiosity",
+            "financial gain",
+            "punishment",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 5,
+          q: "___ refers to realizing the value of developing a skill/behavior.",
+          opts: [
+            "Amotivation",
+            "Identified regulation",
+            "Introjected regulation",
+            "Motivational learning",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 5,
+          q: "Drive theory is a psychological concept that attempts to explain why and how people behave in the ways they do. It is given by ___.",
+          opts: ["Murray", "Hull", "Atkinson", "Zajonc"],
+          ans: 1,
+        },
+        {
+          assignment: 5,
+          q: "___ theory that suggests that people are motivated to take action in order to receive a reward and is based on the idea of operant conditioning.",
+          opts: ["Incentive", "Arousal", "Goal setting", "None of the given"],
+          ans: 0,
+        },
+        {
+          assignment: 5,
+          q: "The Yerkes Dodson law gives ___ relationship between arousal and performance.",
+          opts: ["inverted U shaped", "linear", "no", "parabolic"],
+          ans: 0,
+        },
+        {
+          assignment: 5,
+          q: "The expectancy theory is based on the assumption that ___.",
+          opts: [
+            "our behavior is based on making a conscious choice from a set of possible alternative behaviors",
+            "individuals are motivated to seek out stimulation when they have low levels of arousal, but will become bored and unmotivated when they become too highly aroused",
+            "biological needs produce unpleasant states of arousal which people seek to reduce",
+            "none of the given",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 5,
+          q: "Valence, or the perceived value of reward, would have ___ value if one wants to avoid that reward.",
+          opts: ["one", "zero", "positive", "negative"],
+          ans: 3,
+        },
+        {
+          assignment: 5,
+          q: "Which of the following is not true about Maslow's need hierarchy?",
+          opts: [
+            "Needs lower down in the hierarchy must be satisfied before individuals can attend to higher needs",
+            "Safety needs lie at the bottom of the pyramid",
+            "Deficiency needs are concerned with basic survival",
+            "Growth needs are more psychological needs",
+            "Motivation is seen as being not just concerned with tension reduction and survival but also with human growth and development",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 5,
+          q: "Self-Determination Theory differentiates between ___ and ___ motivation types.",
+          opts: [
+            "autonomous and controlled",
+            "autonomous and intrinsic",
+            "controlled and extrinsic",
+            "introjected and extrinsic",
+            "introjected and intrinsic",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 5,
+          q: "In achievement motivation, the motive to avoid failure often consists of ___.",
+          opts: [
+            "worries about the consequences of failing",
+            "self-criticism",
+            "accelerated heart rate",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+
+        // Assignment 6
+        {
+          assignment: 6,
+          q: "Daniel Goleman's work in emotional intelligence (EI) has outlined ___ main areas of this intelligence.",
+          opts: ["three", "four", "five", "six"],
+          ans: 2,
+        },
+        {
+          assignment: 6,
+          q: "Which of the following statements is not true?",
+          opts: [
+            "Experts even suggested that emotional intelligence/ EQ, is more important than IQ/academic intelligence",
+            "An individual with high EI is not only aware of what emotions they are feeling but can put words to their feelings",
+            "Studies show that EI does not impact aspects of one's life like academic performance",
+            "Peter Salovey and John Mayer were the first to develop a psychological theory of emotional intelligence.",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 6,
+          q: "___ refers to how tuned to the emotions of others a person is.",
+          opts: [
+            "Empathy",
+            "Motivation",
+            "Emotional literacy",
+            "Self regulation",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 6,
+          q: "The following are advantages of developing emotional intelligence, except------",
+          opts: [
+            "Being able to accept criticism and responsibility",
+            "Knowing why we do the things we do",
+            "Being able to say no when we need to",
+            "Being able to hide our feelings from others",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 6,
+          q: "The Pyramid of Emotional Intelligence is also known as the ___ layer model.",
+          opts: ["nine", "five", "seven", "eleven"],
+          ans: 0,
+        },
+        {
+          assignment: 6,
+          q: "EI can be developed at any stage of life through self-effort & training.",
+          opts: ["True", "False"],
+          ans: 0,
+        },
+        {
+          assignment: 6,
+          q: "When someone engages in___, they can regulate their emotions to ensure that others feel more comfortable.",
+          opts: [
+            "emotional exhaustion",
+            "emotional literacy",
+            "empathy",
+            "emotional labor",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 6,
+          q: "The management of emotions is ___.",
+          opts: [
+            "a private act",
+            "influenced by cultural and social norms",
+            "done by actively shaping and directing feelings",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 6,
+          q: "___ is seen when workers change their outward emotional expressions but do not attempt to feel the emotions that they are displaying.",
+          opts: [
+            "deep acting",
+            "emotional contagion",
+            "surface acting",
+            "emotional literacy",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 6,
+          q: "The concept of emotional contagion can be linked to biological basis of ___.",
+          opts: [
+            "emotional neurons",
+            "mirror neurons",
+            "contagious neurons",
+            "None of the given",
+          ],
+          ans: 1,
+        },
+
+        // Assignment 7
+        {
+          assignment: 7,
+          q: "___ defined learning as 'a change in human disposition or capacity that persists over a period of time and is not simply ascribable to processes of growth.",
+          opts: ["Bloom", "Dewey", "Gagne", "Kolb"],
+          ans: 2,
+        },
+        {
+          assignment: 7,
+          q: "The principles of contiguity (how close in time two events must be for a bond to be formed) and reinforcement (any means of increasing the likelihood that an event will be repeated) are central to explaining the learning process in the ___ orientation to learning.",
+          opts: [
+            "Cognitive",
+            "Humanistic",
+            "Social and social-constructivist",
+            "Behaviorist",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 7,
+          q: "Which of the following is not true about humanistic orientations to learning?",
+          opts: [
+            "It has a quality of personal involvement",
+            "It is self-initiated",
+            "It is pervasive",
+            "The locus of evaluation resides definitely outside the learner",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 7,
+          q: "The concept of situated learning is studied under which school of thought of learning theories?",
+          opts: ["behaviorist", "cognitive", "humanistic", "social"],
+          ans: 3,
+        },
+        {
+          assignment: 7,
+          q: "Which of the following is not one of the individual variable factors affecting learning?",
+          opts: ["ergonomics", "interest", "endurance", "ego", "perception"],
+          ans: 0,
+        },
+        {
+          assignment: 7,
+          q: "___ learners prefer maps, graphs, diagrams and charts to learn.",
+          opts: ["Visual", "Solitary", "Kinesthetic", "Auditory"],
+          ans: 0,
+        },
+        {
+          assignment: 7,
+          q: "___ learners search for connections, causes, patterns, and results in their learning.",
+          opts: ["linguistic", "kinesthetic", "visual", "logical"],
+          ans: 3,
+        },
+        {
+          assignment: 7,
+          q: "Effective instruction is ___.",
+          opts: [
+            "interactive, generative and dynamic",
+            "designed to accommodate student learning needs and styles",
+            "guided by general pedagogical approaches",
+            "eclectic",
+            "all of the given",
+          ],
+          ans: 4,
+        },
+        {
+          assignment: 7,
+          q: "___ role of the trainer consists of transmitting information about a subject to the audience.",
+          opts: ["expert", "instructor", "facilitator", "co-learner"],
+          ans: 0,
+        },
+        {
+          assignment: 7,
+          q: "Which of the following is not a component of the ADDIE model?",
+          opts: ["analysis", "integration", "development", "evaluation"],
+          ans: 1,
+        },
+
+        // Assignment 8
+        {
+          assignment: 8,
+          q: "The word 'pedagogy' has been derived from the Greek word 'pedagogue' which stands for___.",
+          opts: [
+            "the science of learning",
+            "the art of observing",
+            "the art of teaching children",
+            "none of the given",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 8,
+          q: "Which of the following statements is not true about pedagogy?",
+          opts: [
+            "It assists both students and teachers in gaining an in-depth understanding of fundamental material.",
+            "It is about suppressing responses from learners",
+            "It enhances the student-teacher relationship",
+            "It enables teachers to influence student learning with an intention to capture the attention of students",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 8,
+          q: "Which of the following is not a pedagogical approach in teaching?",
+          opts: ["reflective", "collective", "collaborative", "integrative"],
+          ans: 1,
+        },
+        {
+          assignment: 8,
+          q: "___ is a form of active learning that starts by posing questions, problems or scenarios rather than simply presenting established facts or portraying a smooth path to knowledge.",
+          opts: [
+            "constructivist learning",
+            "passive learning",
+            "inquiry-based learning",
+            "metalearning",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 8,
+          q: "Which of the following is a primary role of the instructor in experiential learning?",
+          opts: [
+            "posing problems",
+            "providing solutions",
+            "blurring boundaries",
+            "none of the given",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 8,
+          q: "The 'what is important?' stage of the experiential learning process refers to the ___ stage",
+          opts: ["processing", "generalizing", "application", "reflecting"],
+          ans: 0,
+        },
+        {
+          assignment: 8,
+          q: "The ___ learning style as given by Kolb suggests that these individuals prefer to look at things from multiple perspectives and prefer to watch rather than do.",
+          opts: ["Assimilating", "Accommodating", "Converging", "Diverging"],
+          ans: 3,
+        },
+        {
+          assignment: 8,
+          q: "The following factors influence preferred learning styles except___",
+          opts: [
+            "career choice",
+            "personality",
+            "educational specialization",
+            "genes",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 8,
+          q: "Integrative learning often involves three steps. Which of the following is not one of them?",
+          opts: [
+            "collaboration",
+            "integrative enquiry",
+            "application and transfer",
+            "reflection",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 8,
+          q: "In transformative learning, ___ includes a student's habit of the mind, as well as a personal point of view.",
+          opts: [
+            "intentional content",
+            "frame of reference",
+            "frame of context",
+            "none of the given",
+          ],
+          ans: 1,
+        },
+
+        // Assignment 9
+        {
+          assignment: 9,
+          q: "E-learning implies ___ learning",
+          opts: [
+            "mentor assisted",
+            "teacher enhanced",
+            "computer enhanced",
+            "electricity enhanced",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 9,
+          q: "___ type of e-learning is highly interactive, which includes graphics, video, audio and games too.",
+          opts: [
+            "text driven",
+            "simulation",
+            "interactive",
+            "none of the given",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 9,
+          q: "Which of the following is not true about e-learning?",
+          opts: [
+            "one can have access to the content any number of times",
+            "it helps in developing new policies",
+            "it saves time for the students, they don't need to travel to the institution",
+            "it is targeted to cater to the needs of students specifically",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 9,
+          q: "As learning depends on the learner's prior experience, and no two learners will have the same experiences, new information will be dealt with in different ways by different learners. This statement means that learning is ___.",
+          opts: [
+            "goal-oriented",
+            "dependent on self-awareness",
+            "social",
+            "idiosyncratic",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 9,
+          q: "Which of the following is a way of facilitating the social dimension to learning?",
+          opts: [
+            "e-mails",
+            "online discussions",
+            "virtual communities",
+            "all of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 9,
+          q: "We can say that when we're good at something after practice, it's usually because ___",
+          opts: [
+            "our brain has become automated",
+            "our brain has released better chemicals",
+            "our brain has made stronger connections with this information",
+            "our brain has prioritized this information over others",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 9,
+          q: "Learners may multitask when engaging in an online course, which could be resulting in ___.",
+          opts: [
+            "hyperfocus",
+            "better retrieval",
+            "shorter attention spans",
+            "None of the given",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 9,
+          q: "The cognitive load theory suggests that when we overload our___, we are unable to acquire and process new information.",
+          opts: ["sensory memory", "encoding", "retrieval", "working memory"],
+          ans: 3,
+        },
+        {
+          assignment: 9,
+          q: "There are five critical aspects of psychology which are needed to guarantee the implementation of successful eLearning. Which of the following is not one of them?",
+          opts: ["evolution", "self-discipline", "stress", "emotion"],
+          ans: 0,
+        },
+        {
+          assignment: 9,
+          q: "___ is a learning tool, because the explicit navigation of the topic and association types might enable meaningful learning and it helps to reduce the cognitive loads caused by E-learning content and constant attention.",
+          opts: ["topic map", "schema", "prototype", "instructional map"],
+          ans: 0,
+        },
+
+        // Assignment 10
+        {
+          assignment: 10,
+          q: "The Readiness Model for New Normal in Education designed by many educational institutions caters to the following components except ___.",
+          opts: [
+            "parent readiness",
+            "learner readiness",
+            "society readiness",
+            "teacher readiness",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 10,
+          q: "In 2018, Global Education and Skills Forum noted that the 'future' teacher would need some skills to thrive in the 21st century. Which of the following is not one of them?",
+          opts: [
+            "Being a facilitator",
+            "Internal focus",
+            "Strong social skills",
+            "Data analysis",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 10,
+          q: "Which of the following impacts student learning?",
+          opts: [
+            "Their perception about their intelligence and ability",
+            "Prior knowledge",
+            "Their context",
+            "All of the given",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 10,
+          q: "Which of the following statements is not true?",
+          opts: [
+            "Techniques linked to self-control contribute to more effective learning if taught and applied correctly",
+            "Student creativity can be encouraged.",
+            "Clear, explanatory and timely feedback to students is important for learning",
+            "Students tend to enjoy learning and have better outcomes when their motivation is more extrinsic than intrinsic",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 10,
+          q: "Both formative and summative assessment are important and useful, provided they are applied and interpreted appropriately.",
+          opts: ["True", "False"],
+          ans: 0,
+        },
+        {
+          assignment: 10,
+          q: "Individual differences are the unique ways each human being differs from another. It can be handled through using different techniques. Which of the following is not one of them?",
+          opts: ["observation", "sociograms", "rating scales", "ignorance"],
+          ans: 3,
+        },
+        {
+          assignment: 10,
+          q: "Clapping is an example of ___ reward.",
+          opts: ["tangible", "financial", "social", "none of the given"],
+          ans: 2,
+        },
+        {
+          assignment: 10,
+          q: "___ is the process of judging the value or worth of an individual's achievements or characteristics.",
+          opts: [
+            "Goal-setting",
+            "Classroom conduct",
+            "Formation",
+            "Evaluation",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 10,
+          q: "___ refers to the frequent, interactive assessment of student progress to identify learning needs and shape teaching.",
+          opts: [
+            "Formative assessment",
+            "Summative assessment",
+            "Collective assessment",
+            "None of the given",
+          ],
+          ans: 0,
+        },
+        {
+          assignment: 10,
+          q: "'That is an intelligent response, well done' is an example of a ___ level feedback.",
+          opts: [
+            "Task-level",
+            "Process-level",
+            "Facilitator-level",
+            "Personal-level",
+          ],
+          ans: 3,
+        },
+
+        // Assignment 11
+        {
+          assignment: 11,
+          q: "___ refers to a complex set of mental abilities underlying social stimulus perception, processing, interpretation, and response.",
+          opts: [
+            "social schema",
+            "emotional cognition",
+            "social cognition",
+            "emotional schema",
+          ],
+          ans: 2,
+        },
+        {
+          assignment: 11,
+          q: "Piaget's conception of ___ views information inconsistent with an individual's cognitive structures as an initiator for assimilation and accommodation processes.",
+          opts: [
+            "assimilation and accommodation schema",
+            "cognitive determinism",
+            "reciprocal dynamism",
+            "cognitive conflict",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 11,
+          q: "During the earliest stages of development, children see the world from their own perspective and struggle to think about how other people may view the world. This highlights that initially, children are ___.",
+          opts: ["egocentric", "idiosyncratic", "egoistic", "egomaniac"],
+          ans: 0,
+        },
+        {
+          assignment: 11,
+          q: "Which of the following is false regarding social cognition?",
+          opts: [
+            "It develops in childhood and adolescence",
+            "When looking at a social situation, any two people may have wildly different interpretations.",
+            "It includes complex abilities like theory of mind",
+            "There are no cultural differences in social cognition",
+          ],
+          ans: 3,
+        },
+        {
+          assignment: 11,
+          q: "Social processes influence how information is selected, organized, integrated, and retrieved. This highlights the ___ hypothesis.",
+          opts: [
+            "social cue",
+            "cognitive influence",
+            "schema influence",
+            "social mediation",
+          ],
+          ans: 1,
+        },
+        {
+          assignment: 11,
+          q: "The social cognitive theory is developed by ___.",
+          opts: ["Watson", "Piaget", "Bandura", "Freud"],
+          ans: 2,
+        },
+        {
+          assignment: 11,
+          q: "___ refers to the internal or external responses to a person's behavior that affect the likelihood of continuing or discontinuing the behavior.",
+          opts: ["modeling", "schemas", "awards", "reinforcements"],
+          ans: 3,
+        },
+        {
+          assignment: 11,
+          q: "Observational learning occurs through the sequence of ___ number of processes. One of those is attentional processes.",
+          opts: ["four", "five", "six", "seven"],
+          ans: 0,
+        },
+        {
+          assignment: 11,
+          q: "The ___ model of observational learning involves an actual individual demonstrating or acting out a behavior.",
+          opts: ["live", "symbolic", "verbal instructional", "contextual"],
+          ans: 0,
+        },
+        {
+          assignment: 11,
+          q: "___ suggests that our behavior, personal factors, and environmental factors all influence each other.",
+          opts: [
+            "environmental dynamism",
+            "reciprocal determinism",
+            "collective determinism",
+            "reciprocal dynamism",
+          ],
+          ans: 1,
+        },
+      ];
+
+      // Shuffle array function
+      function shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+      }
+
+      // Initialize assignment buttons
+      function initAssignmentGrid() {
+        const grid = document.getElementById("assignmentGrid");
+        for (let i = 0; i <= 11; i++) {
+          const btn = document.createElement("button");
+          btn.className = "assignment-btn";
+          btn.textContent = `Assignment ${i}`;
+          btn.onclick = () => startAssignmentTest(i);
+          grid.appendChild(btn);
+        }
+      }
+
+      // Show assignment selection
+      function showAssignmentSelection() {
+        document
+          .getElementById("assignmentSelection")
+          .classList.remove("hidden");
+      }
+
+      // Start single assignment test
+      function startAssignmentTest(assignmentNum) {
+        testMode = "single";
+        const questions = allQuestions.filter(
+          (q) => q.assignment === assignmentNum
+        );
+        currentTest = shuffleArray(questions);
+        userAnswers = new Array(currentTest.length).fill(null);
+        currentQuestionIndex = 0;
+        showTestScreen();
+      }
+
+      // Start full test
+      function startFullTest() {
+        testMode = "full";
+        currentTest = shuffleArray([...allQuestions]);
+        userAnswers = new Array(currentTest.length).fill(null);
+        currentQuestionIndex = 0;
+        showTestScreen();
+      }
+
+      // Show test screen
+      function showTestScreen() {
+        document.getElementById("modeSelection").classList.add("hidden");
+        document.getElementById("testScreen").classList.remove("hidden");
+        displayQuestion();
+      }
+
+      // Display current question
+      function displayQuestion() {
+        const question = currentTest[currentQuestionIndex];
+        const container = document.getElementById("questionContainer");
+
+        let optionsHTML = "";
+        question.opts.forEach((opt, index) => {
+          const isChecked = userAnswers[currentQuestionIndex] === index;
+          optionsHTML += `
+      <label class="option ${
+        isChecked ? "selected" : ""
+      }" data-index="${index}">
+        <input type="radio" name="answer" value="${index}" ${
+            isChecked ? "checked" : ""
+          }>
+        ${opt}
+      </label>
+    `;
+        });
+
+        container.innerHTML = `
+    <div class="question-container">
+      <div class="question-number">Question ${currentQuestionIndex + 1} of ${
+          currentTest.length
+        }</div>
+      <div class="question-text">${question.q}</div>
+      <div class="options">${optionsHTML}</div>
+    </div>
+  `;
+
+        // Add event listeners to each option
+        const options = container.querySelectorAll(".option");
+        options.forEach((opt) => {
+          opt.addEventListener("click", function () {
+            const selectedIndex = parseInt(this.getAttribute("data-index"));
+            handleAnswerSelection(selectedIndex, options, question.ans);
+          });
+        });
+
+        updateProgress();
+        updateButtons();
+      }
+
+      function handleAnswerSelection(selectedIndex, options, correctIndex) {
+        // Disable further clicks
+        options.forEach((opt) => (opt.style.pointerEvents = "none"));
+
+        // Mark all neutral first
+        options.forEach((opt) =>
+          opt.classList.remove("correct", "incorrect", "selected")
+        );
+
+        // If correct answer
+        if (selectedIndex === correctIndex) {
+          options[selectedIndex].classList.add("correct");
+        } else {
+          options[selectedIndex].classList.add("incorrect");
+          options[correctIndex].classList.add("correct");
+        }
+
+        // Save user answer
+        userAnswers[currentQuestionIndex] = selectedIndex;
+      }
+
+      // Save answer
+      function saveAnswer() {
+        const selected = document.querySelector('input[name="answer"]:checked');
+        if (selected) {
+          userAnswers[currentQuestionIndex] = parseInt(selected.value);
+          // Update visual selection
+          document
+            .querySelectorAll(".option")
+            .forEach((opt) => opt.classList.remove("selected"));
+          selected.parentElement.classList.add("selected");
+        }
+      }
+
+      // Update progress bar
+      function updateProgress() {
+        const progress =
+          ((currentQuestionIndex + 1) / currentTest.length) * 100;
+        document.getElementById("progressFill").style.width = progress + "%";
+        document.getElementById("progressText").textContent = `Question ${
+          currentQuestionIndex + 1
+        } of ${currentTest.length}`;
+      }
+
+      // Update button states
+      function updateButtons() {
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        prevBtn.disabled = currentQuestionIndex === 0;
+        prevBtn.style.opacity = currentQuestionIndex === 0 ? "0.5" : "1";
+
+        if (currentQuestionIndex === currentTest.length - 1) {
+          nextBtn.textContent = "Submit Test";
+        } else {
+          nextBtn.textContent = "Next →";
+        }
+      }
+
+      // Next question
+      function nextQuestion() {
+        if (currentQuestionIndex < currentTest.length - 1) {
+          currentQuestionIndex++;
+          displayQuestion();
+        } else {
+          showResults();
+        }
+      }
+
+      // Previous question
+      function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          displayQuestion();
+        }
+      }
+
+      // Show results
+      function showResults() {
+        let correctCount = 0;
+        currentTest.forEach((q, index) => {
+          if (userAnswers[index] === q.ans) {
+            correctCount++;
+          }
+        });
+
+        const percentage = ((correctCount / currentTest.length) * 100).toFixed(
+          1
+        );
+
+        document.getElementById("testScreen").classList.add("hidden");
+        document.getElementById("resultsScreen").classList.remove("hidden");
+
+        document.getElementById("scoreDisplay").textContent = `${percentage}%`;
+        document.getElementById("resultsDetails").innerHTML = `
+                  <p style="font-size: 1.2em; margin-bottom: 10px;">
+                      <strong>Correct Answers:</strong> ${correctCount} / ${
+          currentTest.length
+        }
+                  </p>
+                  <p style="font-size: 1.1em;">
+                      <strong>Incorrect Answers:</strong> ${
+                        currentTest.length - correctCount
+                      }
+                  </p>
+              `;
+      }
+
+      // Return to menu
+      function returnToMenu() {
+        location.reload();
+      }
+
+      // Initialize event listeners
+      document.addEventListener("DOMContentLoaded", function () {
+        initAssignmentGrid();
+
+        document
+          .getElementById("singleModeCard")
+          .addEventListener("click", showAssignmentSelection);
+        document
+          .getElementById("fullModeCard")
+          .addEventListener("click", startFullTest);
+        document
+          .getElementById("prevBtn")
+          .addEventListener("click", previousQuestion);
+        document
+          .getElementById("nextBtn")
+          .addEventListener("click", nextQuestion);
+        document
+          .getElementById("exitBtn")
+          .addEventListener("click", returnToMenu);
+        document
+          .getElementById("returnBtn")
+          .addEventListener("click", returnToMenu);
+      });
+    </script>
+  </body>
+</html>
